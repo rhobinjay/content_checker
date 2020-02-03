@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="text-center">
+    <div class="mb-4">
+        <p class="mb-4 h2">{{ user.username }}: Score</p>
+        <button id="btn_check_all_exam" type="button" class="btn btn-info">Check User Examination</button>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>User Answer</th>
+                <th>Expected Answer</th>
+                <th>Score</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in integratedlabs %}
+            <tr>
+                <td>{{ item.task.instruction }}</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td><button type="button" class="btn btn-info" onclick="check('{{ user.username }}')">Check</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
