@@ -43,7 +43,14 @@ def db(app):
         db.session.commit()
 
 
-@pytest.mark.parametrize("client, result", [(None, True)], indirect=["client"])
+@pytest.fixture
+def get_fdb_schema():
+    return
+
+
+@pytest.mark.parametrize(
+    "client, result", [(None, True), (None, False)], indirect=["client"]
+)
 def test_create_fdb(client, result):
     expected = {
         "user_answer": "",

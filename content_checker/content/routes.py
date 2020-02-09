@@ -1,6 +1,20 @@
 from flask import Blueprint, request, jsonify
+import subprocess
+from subprocess import Popen
 
 content = Blueprint("content", __name__)
+
+
+def get_fdb_schema(fdb):
+    p = Popen(
+        ["fdb_gen", fdb],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True,
+    )
+
+    output, errors = p.communicate()
+    return output
 
 
 @content.route("/content/create_fdb", methods=["POST"])
@@ -13,6 +27,9 @@ def create_fdb():
         comapre user_fdb_schema and expected_fdb_schema
     """
     if request.method == "POST":
+        username = request.get_data("username")
+        users_fdb = "/home/user/{}/training/integrated_lab/".format(username)
+        get_fdb_schema()
         expected = {
             "user_answer": "",
             "expected": "",
