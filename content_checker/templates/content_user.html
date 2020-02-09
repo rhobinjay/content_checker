@@ -1,5 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
+<script>
+    function check(username) {
+        $.post("check/" + username, '',
+            function (data, textStatus, jqXHR) {
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+            },
+            "json"
+        );
+    }
+</script>
+
 <div class="text-center">
     <div class="mb-4">
         <p class="mb-4 h2">{{ user.username }}: Score</p>
@@ -22,7 +35,8 @@
                 <td>-</td>
                 <td>-</td>
                 <td>-</td>
-                <td><button type="button" class="btn btn-info" onclick="check('{{ user.username }}')">Check</button></td>
+                <td><button type="button" class="btn btn-info" onclick="check('{{ user.username }}')">Check</button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
